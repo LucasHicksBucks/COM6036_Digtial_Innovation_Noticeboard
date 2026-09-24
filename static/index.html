@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Neighbourhood Noticeboard</title>
+  <meta name="description" content="A moderated noticeboard for useful local information.">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="Neighbourhood Noticeboard home"><span class="brand-mark">N</span><span>Neighbourhood<br><strong>Noticeboard</strong></span></a>
+      <button class="button button-light" id="open-submit" type="button">Post a notice</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <div class="intro-inner">
+        <p class="eyebrow">Local information, kept current</p>
+        <h1 id="page-title">What’s happening<br><em>around here?</em></h1>
+        <p class="intro-copy">Find useful events, services and announcements from the people who make our community work.</p>
+      </div>
+    </section>
+
+    <section class="board" aria-labelledby="board-title">
+      <div class="board-heading">
+        <div><p class="eyebrow">The noticeboard</p><h2 id="board-title">Current notices</h2></div>
+        <span id="notice-count" class="count" aria-live="polite"></span>
+      </div>
+      <div class="filters" role="search">
+        <label class="search-box"><span class="sr-only">Search notices</span><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search by keyword or place"></label>
+        <label><span class="sr-only">Filter by category</span><select id="category"><option value="">All categories</option></select></label>
+      </div>
+      <div id="notice-list" class="notice-grid" aria-live="polite"></div>
+      <p id="empty-state" class="empty-state" hidden>No notices match that search. Try a different word or category.</p>
+    </section>
+
+    <section class="archive" aria-labelledby="archive-title">
+      <div class="board-heading"><div><p class="eyebrow">Past notices</p><h2 id="archive-title">Public archive</h2></div><span id="archive-count" class="count" aria-live="polite"></span></div>
+      <div id="public-archive" class="notice-grid"></div>
+      <p id="public-archive-empty" class="empty-state" hidden>No expired notices have been archived yet.</p>
+    </section>
+
+    <section class="moderation" aria-labelledby="moderation-title">
+      <div class="board-heading"><div><p class="eyebrow">Moderator area</p><h2 id="moderation-title">Review queue</h2></div><div class="moderator-tools"><span id="queue-count" class="count" aria-live="polite"></span><button id="sign-out" class="button button-light" type="button" hidden>Sign out</button></div></div>
+      <div id="moderator-login" class="moderator-login">
+        <p>Sign in to review notices submitted by the community.</p>
+        <form id="login-form"><label>Moderator password<input id="password" type="password" required autocomplete="current-password"></label><button class="button button-dark" type="submit">Sign in <span aria-hidden="true">→</span></button></form>
+        <p id="login-message" class="form-message" role="alert"></p>
+      </div>
+      <div id="review-queue" class="review-queue" hidden></div>
+      <div id="moderator-archive" class="moderator-archive" hidden><div class="board-heading"><div><p class="eyebrow">Moderator history</p><h2>Archived decisions</h2></div><span id="moderator-archive-count" class="count"></span></div><div id="moderator-archive-list" class="review-queue"></div></div>
+    </section>
+  </main>
+
+  <dialog id="submit-dialog" aria-labelledby="submit-title">
+    <form id="submit-form" method="dialog">
+      <div class="dialog-header"><div><p class="eyebrow">Share with neighbours</p><h2 id="submit-title">Post a notice</h2></div><button class="icon-button" id="close-submit" type="button" aria-label="Close form">×</button></div>
+      <p class="dialog-note">Your post will be reviewed before it is published.</p>
+      <div class="form-grid">
+        <label class="wide">Title<input name="title" maxlength="80" required placeholder="e.g. Saturday repair cafe"></label>
+        <label>Category<select name="category" required></select></label>
+        <label>Expiry date<input name="expires_on" type="date" required></label>
+        <label class="wide">Location<input name="location" required placeholder="e.g. Community Hall"></label>
+        <label class="wide">Description<textarea name="description" maxlength="500" rows="4" required placeholder="What should neighbours know?"></textarea></label>
+        <label class="wide">Contact details<input name="contact" required placeholder="Email or phone number"></label>
+      </div>
+      <p id="form-message" class="form-message" role="alert"></p>
+      <button class="button button-dark" type="submit">Send for review <span aria-hidden="true">→</span></button>
+    </form>
+  </dialog>
+
+  <script src="/app.js"></script>
+</body>
+</html>
